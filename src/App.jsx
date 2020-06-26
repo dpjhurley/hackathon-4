@@ -24,6 +24,7 @@ const App  = () => {
     }, [searchResults])
 
     const handleClick = () => {
+        setSearchResults([]);
         getFlights(departLocation, arrivalLocation); 
     }
 
@@ -39,9 +40,14 @@ const App  = () => {
         const url = `https://api.skypicker.com/flights?flyFrom=${from}&to=${to}&dateFrom=27/06/2020&dateTo=28/06/2020&limit=5&partner=picky&v=3`
         const resp = await fetch(url);
         const results = await resp.json();
-        console.log(results)
-        setSearchResults(results.data);
-    }
+        console.log('hello', results.data.length)
+        if (results.data.length) {
+            setSearchResults(results.data);
+        } else {
+            setSearchResults(-1)
+        }
+       
+    };
 
     return ( 
        <>
@@ -52,7 +58,11 @@ const App  = () => {
                 departLocation={departLocation}
                 arrivalLocation={arrivalLocation}
             />
+            
             {(searchResults.length) ? (
+                (searchResults == -1) ? (
+                    <p>no search results avaliavle</p>
+                ) : (
                 <>
                     {searchResults.map((f) => (
                         <Flights
@@ -61,9 +71,11 @@ const App  = () => {
                         />
                     ))}
                 </>
+                )
             ) : (
                 <Spinner />
             )}
+            
        </>
     );
   }
@@ -78,3 +90,21 @@ const App  = () => {
 //   dateFrom = 27/06/2020
 //   dateTo = 28/06/2020 ?
 //   nrOfResults = 5
+
+
+// {(searchResults.length) ? (
+//     (searchResults == -1) ? (
+//         <p>no search results avaliavle</p>
+//     ) : (
+//      <>
+//          {searchResults.map((f) => (
+//              <Flights
+//                  flights={f}
+//                  key={f.id}
+//              />
+//          ))}
+//      </>
+//     )
+//  ) : (
+//      <Spinner />
+//  )}
