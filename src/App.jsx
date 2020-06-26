@@ -15,40 +15,33 @@ const fetchUrl = (
 
 const App  = () => {
     const [ searchResults, setSearchResults ] = useState([]);
-    const [ departLocation, setDepartLocation ] = useState('');
-    const [ arrivalLocation, setArrivalLocation ] = useState('');
+    const [ departLocation, setDepartLocation ] = useState('PRG');
+    const [ arrivalLocation, setArrivalLocation ] = useState('VLC');
 
 
     useEffect (() => {
-        getFlights(); 
-    }, [])
+        getFlights(departLocation, arrivalLocation); 
+    }, [searchResults])
 
     const handleClick = () => {
-        handleChangeArrival();
-        handleChangeDepart();
-        
+        getFlights(departLocation, arrivalLocation); 
     }
 
     const handleChangeArrival = (e) => {
-        setArrivalLocation(e.target.value)
+        setArrivalLocation(e.target.value);
     }
 
     const handleChangeDepart = (e) => {
-        setDepartLocation(e.target.value)
+        setDepartLocation(e.target.value);
     }
 
-    const getFlights = async () => {
-        const url = fetchUrl(
-            "PRG",
-            "VLC");
+    const getFlights = async (from, to) => {
+        const url = `https://api.skypicker.com/flights?flyFrom=${from}&to=${to}&dateFrom=27/06/2020&dateTo=28/06/2020&limit=5&partner=picky&v=3`
         const resp = await fetch(url);
         const results = await resp.json();
-        console.log(results.data);
+        console.log(results)
         setSearchResults(results.data);
     }
-
-    
-    
 
     return ( 
        <>
@@ -56,6 +49,8 @@ const App  = () => {
                 handleClick={handleClick} 
                 handleChangeArrival={handleChangeArrival}
                 handleChangeDepart={handleChangeDepart}
+                departLocation={departLocation}
+                arrivalLocation={arrivalLocation}
             />
             {(searchResults.length) ? (
                 <>
