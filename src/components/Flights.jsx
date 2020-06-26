@@ -16,11 +16,11 @@ const Flights = ({ flights }) => {
     return ( <div>
         <Card className="container-sm col-sm-6 my-3 bg-dark" style={{ display: "flex", flexDirection: "column" , alignItems: "center", justifyContent:"center" }}>
           <CardImg top  src={giphy} alt="Plane" style={{ width: "30%", height: "200px", margin:"auto"}} />
-          <CardBody className="card">
+          <CardBody className="card my-2">
             <CardTitle>From {flights.cityFrom} ({flights.flyFrom} TO  {flights.cityTo} ({flights.flyTo} </CardTitle>
             <CardSubtitle>Price: {flights.price} EURO </CardSubtitle>
             <CardText>Departure time:{dateFormatted(flights.dTime)} , Arrival time: {dateFormatted(flights.aTime)} </CardText>
-            <Button>Buy</Button>
+            <Button >Buy</Button>
           </CardBody>
         </Card>
       </div>
