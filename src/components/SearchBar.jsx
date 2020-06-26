@@ -4,24 +4,26 @@ import React, { Fragment } from 'react';
 const SearchBar = ({
     handleChangeArrival,
     handleChangeDepart,
-    handleClick
+    handleClick,
+    arrivalLocation,
+    departLocation
 }) =>{
     return (
         <>
         <label>DEPARTURE</label>
-        <select name="departure" onChange={handleChangeArrival} className="form-control" id="exampleFormControlSelect1">
-            <option value="PRG">Prague</option>
-            <option value="VLC">Berlin</option>
-            <option value="VLC">Warsaw</option>
-            <option value="VLC">Pardubice</option>
+        <select name="departure" onChange={handleChangeDepart} value={departLocation} className="form-control" id="exampleFormControlSelect1">
+            <option value="PRG" >Prague</option>
+            <option value="SXF" >Berlin</option>
+            <option value="WAW" >Warsaw</option>
+            <option value="PED">Pardubice</option>
         </select>
         <label>ARRIVALS</label>
-        <select name="departure" onChange={handleChangeDepart} className="form-control" id="exampleFormControlSelect1">
-            <option value="VLC">Valentia</option>
-            <option value="VLC">Barcelona</option>
-            <option value="VLC">Madrid</option>
-            <option value="VLC">Milano</option>
-            <option value="VLC">Athens</option>
+        <select name="arrival" onChange={handleChangeArrival} value={arrivalLocation} className="form-control" id="exampleFormControlSelect1">
+            <option value="VLC">Valencia</option>
+            <option value="BCN">Barcelona</option>
+            <option value="MAD">Madrid</option>
+            <option value="MIL">Milano</option>
+            <option value="ATH">Athens</option>
         </select>
             <div className="text-center my-3">
         <button type="submit" onClick={handleClick} className="btn btn-primary mb-2 center w-100">Search</button>
