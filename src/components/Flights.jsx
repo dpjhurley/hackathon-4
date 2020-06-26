@@ -18,9 +18,9 @@ const Flights = ({ flights }) => {
     return ( <div>
         <Card className="container-sm col-sm-12 my-3 bg-light" style={{ display: "flex", flexDirection: "column" , alignItems: "center", justifyContent:"center" }}>
           <div className="d-flex justify-content-around">
-          <CardImg top  src={[flights.countryFrom.name]} alt="Flag" style={{ width: "30%", height: "150px", margin:"auto"}} />
+          <CardImg top  src={Czechia} alt="Flag" style={{ width: "30%", height: "150px", margin:"auto"}} />
           <CardImg top  src={giphy} alt="Plane" style={{ width: "30%", height: "200px", margin:"auto"}} />
-          <CardImg top  src={} alt="Flag" style={{ width: "30%", height: "150px", margin:"auto"}} />
+          <CardImg top  src={Spain} alt="Flag" style={{ width: "30%", height: "150px", margin:"auto"}} />
           </div>
           <CardBody className="card my-2 w-100 p-3">
             <CardTitle className="h2">From {flights.cityFrom} {flights.flyFrom} TO  {flights.cityTo} {flights.flyTo} </CardTitle>
