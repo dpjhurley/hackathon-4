@@ -15,7 +15,7 @@ import {
   const map = {
     'PRG': Czechia,
     'VLC': Spain,
-    'SXF': Germany,
+    'BER': Germany,
     'WAW': Poland,
     'PED': Czechia,
     'BCN': Spain,
@@ -24,8 +24,8 @@ import {
     'ATH': Greece
   }
 
-const Flights = ({ flights }) => {
 
+const Flights = ({ flights }) => {
     const dateFormatted = (time) => {
         return DateTime.fromMillis(time * 1000).toFormat('hh:mm');
     }

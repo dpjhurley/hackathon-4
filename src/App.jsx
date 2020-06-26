@@ -21,7 +21,7 @@ const App  = () => {
 
     useEffect (() => {
         getFlights(departLocation, arrivalLocation); 
-    }, [searchResults])
+    }, [])
 
     const handleClick = () => {
         setSearchResults([]);
