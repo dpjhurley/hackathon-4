@@ -24,7 +24,7 @@ const SearchBar = ({
             <option value="VLC">Athens</option>
         </select>
             <div className="text-center my-3">
-        <button type="submit" onClick={handleClick} className="btn btn-primary mb-2 center">Search</button>
+        <button type="submit" onClick={handleClick} className="btn btn-primary mb-2 center w-100">Search</button>
         </div>
       </>
     );
