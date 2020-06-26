@@ -3,6 +3,8 @@ import Flights from './components/Flights.jsx';
 import Spinner from './components/Spinner.jsx';
 import SearchBar from './components/SearchBar.jsx';
 
+import { Alert } from 'reactstrap';
+
 const fetchUrl = (
         from,
         to,
@@ -17,14 +19,15 @@ const App  = () => {
     const [ searchResults, setSearchResults ] = useState([]);
     const [ departLocation, setDepartLocation ] = useState('PRG');
     const [ arrivalLocation, setArrivalLocation ] = useState('VLC');
+    const [ loading, setLoading ] = useState(true);
 
 
     useEffect (() => {
         getFlights(departLocation, arrivalLocation); 
-    }, [searchResults])
+    }, [])
 
     const handleClick = () => {
-        setSearchResults([]);
+        setLoading(true);
         getFlights(departLocation, arrivalLocation); 
     }
 
@@ -40,13 +43,9 @@ const App  = () => {
         const url = `https://api.skypicker.com/flights?flyFrom=${from}&to=${to}&dateFrom=27/06/2020&dateTo=28/06/2020&limit=5&partner=picky&v=3`
         const resp = await fetch(url);
         const results = await resp.json();
+        setLoading(false);
         console.log('hello', results.data.length)
-        if (results.data.length) {
-            setSearchResults(results.data);
-        } else {
-            setSearchResults(-1)
-        }
-       
+        setSearchResults(results.data);       
     };
 
     return ( 
@@ -58,23 +57,25 @@ const App  = () => {
                 departLocation={departLocation}
                 arrivalLocation={arrivalLocation}
             />
-            
-            {(searchResults.length) ? (
-                (searchResults == -1) ? (
-                    <p>no search results avaliavle</p>
-                ) : (
-                <>
-                    {searchResults.map((f) => (
-                        <Flights
-                            flights={f}
-                            key={f.id}
-                        />
-                    ))}
-                </>
-                )
+            {(loading) ? (
+                 <Spinner />
             ) : (
-                <Spinner />
+            (searchResults.length) ? (
+                    <>
+                        {searchResults.map((f) => (
+                            <Flights
+                                flights={f}
+                                key={f.id}
+                            />
+                        ))}
+                    </>
+                ) : (
+                    <Alert color="warning" className="text-center">
+                        <strong>This is a warning alert — no search results avaliable!</strong>
+                    </Alert>
+                )
             )}
+            
             
        </>
     );
@@ -82,6 +83,7 @@ const App  = () => {
    
   export default App;
 
+ 
 
 //   url = `https://api.skypicker.com/flights?flyFrom=${from}&to=${to}&dateFrom=${dateFrom}&dateTo=${dateTo}&limit=${nrOfResults}`
 
